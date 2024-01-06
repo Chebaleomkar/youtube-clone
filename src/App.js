@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
+import { AppContext } from './context/ContextApi'
+import Header from './components/Header'
+import Feed from './components/Feed'
+import SearchResult from './components/SearchResult'
+
+import { BrowserRouter, Route , Routes } from 'react-router-dom'
+import VideoDetails from './components/VideoDetails';
+import Premimum from './components/Premimum'
+import Sucess from './components/Sucess'
+import Cancel from './components/Cancel'
+
+const App = () => {
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AppContext>
+      <BrowserRouter>
+        <div className='flex flex-col h-full'>
+          <Header />
+          <Routes>
+             <Route path='/' element={<Feed />} />
+             <Route path='/searchresult/:searchquery' element={<SearchResult />} />
+             <Route path='/video/:id' element={<VideoDetails />} />
+             <Route path='/premium' element={<Premimum />} />
+             <Route path='/success' element={<Sucess />} />
+             <Route path='/cancel' element={<Cancel />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </AppContext>
+  )
 }
 
-export default App;
+export default App
